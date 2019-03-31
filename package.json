@@ -1,0 +1,39 @@
+{
+  "name": "scpdb-featured",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node build",
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint app --ext='ts'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/scpdb/featured.git"
+  },
+  "author": "Gadzhi Gadzhiev <resure@yandex.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scpdb/featured/issues"
+  },
+  "homepage": "https://github.com/scpdb/featured#readme",
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "node-trello": "^1.3.0",
+    "scpdb-logger": "^3.0.0",
+    "wikidot-kit": "^0.7.0"
+  },
+  "devDependencies": {
+    "@types/got": "^9.4.1",
+    "@types/node": "^11.12.2",
+    "@typescript-eslint/eslint-plugin": "^1.5.0",
+    "@typescript-eslint/parser": "^1.5.0",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "tsc-watch": "^2.0.0",
+    "typescript": "^3.3.0"
+  }
+}
