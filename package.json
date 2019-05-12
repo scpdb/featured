@@ -8,10 +8,8 @@
     "dev": "tsc --watch",
     "lint": "eslint app --ext='ts'",
     "prepublishOnly": "npm run build",
-    "deploy:install": "sudo cp /var/scpdb/featured/current/deploy/featured.service /etc/systemd/system/scpdb-featured.service && sudo systemctl enable scpdb-featured && npm run crontab:install",
-    "crontab:install": "sudo crontab -u scpdb /var/scpdb/featured/current/deploy/crontab",
-    "deploy:restart": "sudo systemctl restart scpdb-featured",
-    "deploy": "np && ssh mars.scpdb.org 'cd /var/scpdb/featured && npm upgrade scpdb-featured --latest && npm run symlink && cd current && npm run deploy:install && npm run deploy:restart'"
+    "deploy:install": "sudo crontab -u scpdb /var/scpdb/featured/current/deploy/crontab",
+    "deploy": "np && ssh mars.scpdb.org 'cd /var/scpdb/featured && npm upgrade scpdb-featured --latest && npm run symlink && cd current && npm run deploy:install'"
   },
   "files": [
     "app",
