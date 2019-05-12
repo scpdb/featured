@@ -1,4 +1,4 @@
 SHELL=/bin/bash
 
-00 00 * * * cd /var/scpdb/featured/current && /usr/bin/node build rotateDaily
-02 00 * * 1 cd /var/scpdb/featured/current && /usr/bin/node build rotateWeekly
+00 00 * * * set -a && source /var/scpdb/env && set +a && cd /var/scpdb/featured/current && /usr/bin/node build rotateDaily
+02 00 * * 1 set -a && source /var/scpdb/env && set +a && cd /var/scpdb/featured/current && /usr/bin/node build rotateWeekly
