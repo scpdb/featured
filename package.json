@@ -32,7 +32,7 @@
     "dotenv": "^7.0.0",
     "node-trello": "^1.3.0",
     "scpdb-logger": "^3.1.3",
-    "wikidot-kit": "^0.7.0"
+    "wikidot-kit": "^3.0.0"
   },
   "devDependencies": {
     "@types/got": "^9.4.1",
