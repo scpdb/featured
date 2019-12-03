@@ -46,7 +46,7 @@ export function updateCardList(cardId: string, listId: string, position?: number
         reject(error);
       }
       log('[TRELLO] TrelloCard list updated', {
-        extra: { cardId, listId }
+        extra: { cardId, listId },
       });
       resolve();
     });

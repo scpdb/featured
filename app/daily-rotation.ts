@@ -5,7 +5,7 @@ import {
   DAILY_BACKLOG_LIST_ID,
   DAILY_PREVIOUS_LIST_ID,
 } from './trello';
-import {wk} from './wikidot-kit';
+import wk from './wikidot-kit';
 
 const PAGE_NAME_REG = /^[a-zA-Z0-9_:-]+$/;
 const FEATURED_BLOCK_REGEXP = /\[!--\sFEATURED_DAILY_START\s--][\s\S]*\[!--\sFEATURED_DAILY_END\s--]/;
@@ -28,10 +28,10 @@ export default async function rotateDaily(): Promise<any> {
 
   log(`Rotating featured daily page to ${name}`);
 
-  const currentPage = await wk.fetchPage({wiki: WIKI_NAME, name});
+  const currentPage = await wk.fetchPage({ wiki: WIKI_NAME, name });
   const previousPages = await Promise.all(previousCards.map(async ({ name: cardName }) => wk.fetchPage({
     wiki: WIKI_NAME,
-    name: cardName
+    name: cardName,
   })));
 
   const previousPagesLinks = previousPages.map(page => `- [/${page.fullname} ${page.title}]`).join('\n');
@@ -64,8 +64,8 @@ export default async function rotateDaily(): Promise<any> {
     method: 'pages.save_one',
     args: {
       page: PAGE_NAME,
-      content: updatedContent
-    }
+      content: updatedContent,
+    },
   });
 
   await updateCardList(current.id, DAILY_PREVIOUS_LIST_ID, (previousCards[0] && previousCards[0].pos - 1));

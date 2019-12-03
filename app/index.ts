@@ -15,6 +15,6 @@ switch (task) {
     rotateWeekly().catch(console.error);
     break;
   default:
-    log('Usage: node build <rotateDaily|rotateWeekly>', {type: 'error'});
+    log('Usage: node build <rotateDaily|rotateWeekly>', { type: 'error' });
     process.exit(1);
 }

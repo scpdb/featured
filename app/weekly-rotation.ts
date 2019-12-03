@@ -5,7 +5,7 @@ import {
   WEEKLY_BACKLOG_LIST_ID,
   WEEKLY_PREVIOUS_LIST_ID,
 } from './trello';
-import { wk } from './wikidot-kit';
+import wk from './wikidot-kit';
 
 const PAGE_NAME_REG = /^[a-zA-Z0-9_:-]+$/;
 const FEATURED_BLOCK_REGEXP = /\[!--\sFEATURED_WEEKLY_START\s--][\s\S]*\[!--\sFEATURED_WEEKLY_END\s--]/;
@@ -30,7 +30,7 @@ export default async function rotateWeekly(): Promise<void> {
 
   log(`Rotating featured weekly to page ${name}`);
 
-  const currentPage = await wk.fetchPage({wiki: WIKI_NAME, name});
+  const currentPage = await wk.fetchPage({ wiki: WIKI_NAME, name });
 
   const updatedBlock = `
 [!-- FEATURED_WEEKLY_START --]
@@ -56,9 +56,9 @@ export default async function rotateWeekly(): Promise<void> {
     method: 'pages.save_one',
     args: {
       page: PAGE_NAME,
-      content: updatedContent
-    }
-  })
+      content: updatedContent,
+    },
+  });
 
   await updateCardList(current.id, WEEKLY_PREVIOUS_LIST_ID, (previousCards[0] && previousCards[0].pos - 1));
 
