@@ -30,7 +30,7 @@ export default async function rotateWeekly(): Promise<void> {
 
   log(`Rotating featured weekly to page ${name}`);
 
-  const currentPage = await wk.fetchPage({ wiki: WIKI_NAME, name });
+  const currentPage = await wk.fetchPage(WIKI_NAME, name);
 
   const updatedBlock = `
 [!-- FEATURED_WEEKLY_START --]
@@ -48,16 +48,13 @@ export default async function rotateWeekly(): Promise<void> {
 [!-- FEATURED_WEEKLY_END --]
     `.trim();
 
-  const { content } = await wk.fetchPage({ wiki: WIKI_NAME, name: PAGE_NAME });
+  const { content } = await wk.fetchPage(WIKI_NAME, PAGE_NAME);
   const updatedContent = content.replace(FEATURED_BLOCK_REGEXP, updatedBlock);
 
-  await wk.call({
-    wiki: WIKI_NAME,
-    method: 'pages.save_one',
-    args: {
-      page: PAGE_NAME,
-      content: updatedContent,
-    },
+  await wk.call('pages.save_one', {
+    site: WIKI_NAME,
+    page: PAGE_NAME,
+    content: updatedContent,
   });
 
   await updateCardList(current.id, WEEKLY_PREVIOUS_LIST_ID, (previousCards[0] && previousCards[0].pos - 1));

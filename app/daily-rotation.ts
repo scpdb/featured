@@ -28,11 +28,9 @@ export default async function rotateDaily(): Promise<any> {
 
   log(`Rotating featured daily page to ${name}`);
 
-  const currentPage = await wk.fetchPage({ wiki: WIKI_NAME, name });
-  const previousPages = await Promise.all(previousCards.map(async ({ name: cardName }) => wk.fetchPage({
-    wiki: WIKI_NAME,
-    name: cardName,
-  })));
+  const currentPage = await wk.fetchPage(WIKI_NAME, name);
+  const previousPages = await Promise.all(previousCards
+    .map(async ({ name: cardName }) => wk.fetchPage(WIKI_NAME, cardName)));
 
   const previousPagesLinks = previousPages.map(page => `- [/${page.fullname} ${page.title}]`).join('\n');
 
@@ -56,16 +54,13 @@ export default async function rotateDaily(): Promise<any> {
 [!-- FEATURED_DAILY_END --]
     `.trim();
 
-  const { content } = await wk.fetchPage({ wiki: WIKI_NAME, name: PAGE_NAME });
+  const { content } = await wk.fetchPage(WIKI_NAME, PAGE_NAME);
   const updatedContent = content.replace(FEATURED_BLOCK_REGEXP, updatedBlock);
 
-  await wk.call({
-    wiki: WIKI_NAME,
-    method: 'pages.save_one',
-    args: {
-      page: PAGE_NAME,
-      content: updatedContent,
-    },
+  await wk.call('pages.save_one', {
+    site: WIKI_NAME,
+    page: PAGE_NAME,
+    content: updatedContent,
   });
 
   await updateCardList(current.id, DAILY_PREVIOUS_LIST_ID, (previousCards[0] && previousCards[0].pos - 1));
